@@ -12,8 +12,10 @@ export class App extends Component {
 		super(props)
 		this.state = {
 			cityName: '',
+			weatherData: '',
 			toShowTheCity: false,
-			dataOfCities: {}
+			dataOfCities: {},
+			
 		}
 	}
 
@@ -21,16 +23,24 @@ export class App extends Component {
 		this.setState({
 			cityName: e.target.value,
 		})
+		console.log(e.target.value);
 		console.log(this.state.cityName);
 	}
 
 	handleSubmitting = async (e) => {
-		e.preventDefault();
-		const axiosResponse = await axios.get(`https://us1.locationiq.com/v1/search.php?key=pk.d36871f015649f915282f374cff76628&city=${this.state.cityName}&format=json`);
-		this.setState({
-			toShowTheCity: true,
-			dataOfCities: axiosResponse.data[0]
-		})
+		try {
+			e.preventDefault();
+			const axiosResponse = await axios.get(`https://us1.locationiq.com/v1/search.php?key=pk.d36871f015649f915282f374cff76628&city=${this.state.cityName}&format=json`);
+			const myApiRes = await axios.get(`${process.env.REACT_APP_URL}/weather`);
+			this.setState({
+				toShowTheCity: true,
+				dataOfCities: axiosResponse.data[0],
+				weatherData: myApiRes.data.data,
+			})
+			console.log(this.state.weatherData);
+		} catch (error){
+			
+		}
 	}
 
 	render() {
@@ -39,7 +49,7 @@ export class App extends Component {
 			backgroundColor: '#564a4a',
 			padding: "10px",
 			fontFamily: "Arial"
-		  };
+		};
 		return (
 			<>
 				<Container className="justify-content-md-center">
@@ -52,7 +62,7 @@ export class App extends Component {
 						<Col md="auto" ><div>
 							<Form onSubmit={this.handleSubmitting}>
 								<Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-									<Form.Label column sm={15} className="text-center" style={{fontSize: "30px"}}>
+									<Form.Label column sm={15} className="text-center" style={{ fontSize: "30px" }}>
 										City Name
 										<Form.Control type="text" placeholder="City Name" onChange={this.handleForm} />
 									</Form.Label>
@@ -72,8 +82,11 @@ export class App extends Component {
 								<Card className="bg-dark text-white">
 									<Card.Img src={`https://maps.locationiq.com/v3/staticmap?key=pk.d36871f015649f915282f374cff76628&q&center=${this.state.dataOfCities.lat},${this.state.dataOfCities.lon}&zoom=15`} alt="Card image" />
 									<Card.ImgOverlay>
-										<Card.Title style={{color: "#f55c47"}}>{this.state.cityName}</Card.Title>
-										<Card.Text style={{color: "#f55c47"}}>{this.state.dataOfCities.display_name}</Card.Text>
+										<Card.Title style={{ color: "#f55c47" }}>{this.state.cityName}</Card.Title>
+										<Card.Text style={{ color: "#f55c47" }}>{this.state.dataOfCities.display_name}</Card.Text>
+										<Card.Text style={{ color: "#f55c47" }}>Latitude: {this.state.dataOfCities.lon}</Card.Text>
+										<Card.Text style={{ color: "#f55c47" }}>Longitude: {this.state.dataOfCities.lat}</Card.Text>
+										<Card.Text style={{ color: "#f55c47" }}>Description: {this.state.weatherData.description}</Card.Text>
 									</Card.ImgOverlay>
 								</Card>
 							</div>
