@@ -13,16 +13,12 @@ export class Weather extends Component {
 								<Table striped bordered hover>
 									<thead  className="text-center">
 										<tr>
-											<th>Longitude</th>
-											<th>Latitude</th>
 											<th>Description</th>
 											<th>Date</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<td>{this.props.lon}</td>
-											<td>{this.props.lat}</td>
 											<td>{Obj.description}</td>
 											<td>{Obj.date}</td>
 										</tr>

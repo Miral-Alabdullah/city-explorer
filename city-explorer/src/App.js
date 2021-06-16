@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Weather from './components/Weather';
 import Map from './components/Map';
 import FormUser from './components/FormUser';
+import CityInfo from './components/CityInfo';
 import axios from 'axios';
 
 export class App extends Component {
@@ -25,8 +26,6 @@ export class App extends Component {
 		this.setState({
 			cityName: e.target.value,
 		})
-		console.log(e.target.value);
-		console.log(this.state.cityName);
 	}
 
 	handleSubmitting = async (e) => {
@@ -47,6 +46,7 @@ export class App extends Component {
 		});
 
 	}
+	
 
 	render() {
 		const mystyle = {
@@ -89,12 +89,16 @@ export class App extends Component {
 									</Col>
 									<Col>
 										<div>
-										<h2 className="text-center">{this.state.cityName}</h2>
-											<Weather
-												weatherData={this.state.weatherData}
+											<div>
+												<CityInfo
 												cityName={this.state.cityName}
 												lon={this.state.dataOfCities.lat}
 												lat={this.state.dataOfCities.lon}
+												/>
+											</div>
+											<Weather
+												weatherData={this.state.weatherData}
+												cityName={this.state.cityName}
 											/>
 										</div>
 									</Col>
