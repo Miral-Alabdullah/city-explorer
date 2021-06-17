@@ -5,35 +5,32 @@ export class Weather extends Component {
 
 	render() {
 		return (
-			<>
-				{
-					this.props.weatherData.map(Obj => {
-						return (
-							<>
-								<Table striped bordered hover>
-									<thead  className="text-center">
-										<tr>
-											<th>Longitude</th>
-											<th>Latitude</th>
-											<th>Description</th>
-											<th>Date</th>
-										</tr>
-									</thead>
+			<div class="shadow-lg mb-5 bg-body rounded">
+				<Table class="table-secondary">
+					<thead className="text-center">
+						<tr class="table-secondary">
+							<th>Description</th>
+							<th>Date</th>
+						</tr>
+					</thead>
+					{
+						this.props.weatherData.map(Obj => {
+							return (
+								<>
 									<tbody>
-										<tr>
-											<td>{this.props.lon}</td>
-											<td>{this.props.lat}</td>
+										<tr class="table-danger">
 											<td>{Obj.description}</td>
 											<td>{Obj.date}</td>
 										</tr>
 									</tbody>
-								</Table>
-							</>
+								</>
+							)
+						}
 						)
 					}
-					)
-				}
-			</>)
+				</Table>
+
+			</div>)
 	}
 }
 
