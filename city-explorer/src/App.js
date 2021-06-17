@@ -6,6 +6,7 @@ import Weather from './components/Weather';
 import Map from './components/Map';
 import FormUser from './components/FormUser';
 import CityInfo from './components/CityInfo';
+import Movies from './components/Movies';
 import axios from 'axios';
 
 export class App extends Component {
@@ -20,7 +21,7 @@ export class App extends Component {
 			error: '',
 			lat: '',
 			lon: '',
-			arrayOfMovies:[],
+			arrayOfMovies: [],
 
 		}
 	}
@@ -74,7 +75,7 @@ export class App extends Component {
 				<Container className="justify-content-md-center">
 					<Row className="text-center">
 						<div style={mystyle}>
-							<h1>City Explorer {this.state.arrayOfMovies}</h1>
+							<h1>City Explorer</h1>
 						</div>
 					</Row>
 					<Row className="justify-content-md-center">
@@ -103,6 +104,21 @@ export class App extends Component {
 												lon={this.state.dataOfCities.lon}
 												lat={this.state.dataOfCities.lat}
 											/>
+											<dv>
+												{
+													this.state.arrayOfMovies.map((element) => (
+														< Movies
+														title = { element.title }
+														overview = { element.overview }
+														vote_average = { element.vote_average }
+														vote_count = { element.vote_count }
+														poster_path = { element.poster_path }
+														popularity = { element.popularity }
+														release_date = { element.release_date }
+														/>
+														
+													))},								
+											</dv>
 										</div>
 									</Col>
 									<Col>
