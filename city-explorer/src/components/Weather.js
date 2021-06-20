@@ -14,9 +14,10 @@ export class Weather extends Component {
 						</tr>
 					</thead>
 					{
-						this.props.weatherData.map(Obj => {
+						this.props.weatherData.map((Obj, index) => {
 							return (
 								<>
+								<th>Day {index+1}</th>
 									<tbody>
 										<tr class="table-danger">
 											<td>{Obj.description}</td>
