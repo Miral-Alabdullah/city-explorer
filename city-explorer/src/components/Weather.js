@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
 
+///Fixing some issues 
 export class Weather extends Component {
 
 	render() {
