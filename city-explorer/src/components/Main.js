@@ -9,6 +9,7 @@ import CityInfo from './CityInfo';
 import Movies from './Movies';
 import axios from 'axios';
 
+
 export class Main extends Component {
 
 	constructor(props) {
@@ -18,7 +19,6 @@ export class Main extends Component {
 			weatherData: [],
 			toShowTheCity: false,
 			dataOfCities: {},
-			error: '',
 			lat: '',
 			lon: '',
 			arrayOfMovies: [],
@@ -58,7 +58,7 @@ export class Main extends Component {
 			})
 		}
 		catch (error) {
-			this.setState({ error: error.message })
+			alert('Invalid city. Try Again!')
 		};
 	}
 
@@ -81,9 +81,6 @@ export class Main extends Component {
 					<Row className="justify-content-md-center">
 						<Col md="auto" >
 							<div>
-								<div>
-									<p>{this.state.error}</p>
-								</div>
 								<FormUser
 									handleSubmitting={this.handleSubmitting}
 									handleForm={this.handleForm}
@@ -108,16 +105,16 @@ export class Main extends Component {
 												{
 													this.state.arrayOfMovies.map((element) => (
 														< Movies
-														title = { element.title }
-														overview = { element.overview }
-														vote_average = { element.vote_average }
-														vote_count = { element.vote_count }
-														poster_path = { element.poster_path }
-														popularity = { element.popularity }
-														release_date = { element.release_date }
+															title={element.title}
+															overview={element.overview}
+															vote_average={element.vote_average}
+															vote_count={element.vote_count}
+															poster_path={element.poster_path}
+															popularity={element.popularity}
+															release_date={element.release_date}
 														/>
-														
-													))},								
+
+													))},
 											</dv>
 										</div>
 									</Col>
